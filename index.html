@@ -11,11 +11,18 @@
         var $body = $('body');
         $body.html('');
 
+        var generateTweet = function(tweet) {
+          var $result = $('<div class="tweet"></div>');
+          $result.append($('<span class="user"></span>').text('@' + tweet.user));
+          $result.append($('<p></p>').text(tweet.message));
+          $result.append($('<span class="time"></span>').text(tweet.created_at));
+          return $result;
+        };
+
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
+          var $tweet = generateTweet(tweet);
           $tweet.appendTo($body);
           index -= 1;
         }
