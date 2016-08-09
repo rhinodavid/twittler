@@ -1,3 +1,11 @@
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -48,3 +56,31 @@ table {
 }
 
 /***************************************************/
+
+body {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	line-height: 1.5em;
+}
+
+.tweet {
+	margin-bottom: 2em;
+	padding: .5em;
+	border: 1px solid #666;
+	border-radius: .5em;
+}
+
+.tweet span {
+	display: block;
+}
+
+.user {
+	font-size: .75em;
+	font-weight: 800;
+	letter-spacing: 0.05em;
+}
+
+.time {
+	font-size: 0.5em;
+	color: #666;
+}
