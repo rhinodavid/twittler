@@ -63,8 +63,31 @@ body {
 	line-height: 1.5em;
 }
 
+header {
+	position: absolute;
+	top: 0;
+	height: 3em;
+	background-color: green;
+	color: white;
+	width: 100%;
+}
+
+header h1 {
+	max-width: 800px;
+	padding: 0.7em 0.5em;
+	margin: auto;
+	font-weight: 700;
+	letter-spacing: 0.2em;
+}
+
+.fluid-container {
+	max-width: 800px;
+	margin: 3em auto 0 auto;
+	padding: .5em;
+}
+
 .tweet {
-	margin-bottom: 2em;
+	margin-bottom: 1em;
 	padding: .5em;
 	border: 1px solid #666;
 	border-radius: .5em;
