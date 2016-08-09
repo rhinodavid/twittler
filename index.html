@@ -16,8 +16,6 @@
     <script>
 
       $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
 
         var generateTweet = function(tweet) {
           var $result = $('<div class="tweet"></div>');
@@ -31,7 +29,7 @@
         while(index >= 0){
           var tweet = streams.home[index];
           var $tweet = generateTweet(tweet);
-          $tweet.appendTo($body);
+          $tweet.appendTo($('.feed'));
           index -= 1;
         }
 
