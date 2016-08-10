@@ -23,7 +23,7 @@
 
         var generateTweet = function(tweet) {
           var now = new Date();
-          var $result = $('<div class="tweet" data-user="' + tweet.user + '"></div>');
+          var $result = $('<div class="tweet clearfix" data-user="' + tweet.user + '"></div>');
           $result.append($('<a href="#" class="user"></a>').text('@' + tweet.user));
           $result.append($('<p></p>').text(tweet.message));
           $result.append($('<span class="time"></span>').text(timeAgo(tweet.created_at, now)));
