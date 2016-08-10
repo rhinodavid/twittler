@@ -20,7 +20,7 @@
         <div class="right-inputs">
           <label for="username">User Name:</label> 
           <input type="text" name="username" id="username" value="HRStud"></input>
-          <input type="submit" id="submit-button"></input>
+          <button type="button" id="submit-button">Post</button>
         </div>
       </form>
       <section class="feed"></section>
@@ -81,6 +81,15 @@
 
         };
 
+        var pushUserTweet = function() {
+          var tweet = {};
+          tweet.message = $('#post-content').val();
+          tweet.user = $('#username').val();
+          tweet.created_at = new Date();
+          addTweet(tweet);
+          $('form.new-tweet').find('textarea').val('');
+        };
+
         $('#refresh-button').on('click', function(event){
           event.preventDefault();
           refreshFeed();
@@ -91,7 +100,18 @@
           $('#home-button').hide();
           $('#refresh-button').show();
           refreshFeed();
-        })
+        });
+
+        $('#submit-button').on('click', function(event){
+          event.preventDefault();
+          event.stopPropagation();
+          pushUserTweet();
+          refreshFeed();
+          $('#home-button').hide();
+          $('#refresh-button').show();
+        });
+
+
 
         refreshFeed(); // refresh the feed at the start of the doc ready
 
