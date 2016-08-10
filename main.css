@@ -184,3 +184,20 @@ form {
 	color: #666;
 	float: right;
 }
+
+footer {
+	width: 100%;
+	background-color: midnightblue;
+	height: 2em;
+}
+
+footer a,
+footer a:visited {
+	display: block;
+	text-decoration: none;
+	color: white;
+	font-size: 0.75em;
+	font-weight: 300;
+	line-height: 0.5em;
+	margin-top: 0.5em;
+}
