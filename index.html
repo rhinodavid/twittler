@@ -9,7 +9,7 @@
     <header>
       <div class="width-container">
         <h1>twittler</h1>
-        <span id="refresh-button">Refresh</span> 
+        <a href="#"><span id="refresh-button">Refresh</span></a>
       </div>
     </header>
     <div class="width-container body-container">
@@ -29,18 +29,25 @@
 
         var refreshFeed = function() {
           var maxTweets = 10; // only show the newest 10 tweets
-          var index = streams.home.length < maxTweets ?
-                          streams.home.length - 1 : maxTweets - 1;
+          var addedTweets = 0;
+          var index = streams.home.length - 1;
           var $feed = $('.feed');
           $feed.empty();
-          while (index >= 0) {
+          $('<h1>Feed</h1>').appendTo($feed);
+          while (index >= 0 && addedTweets < maxTweets) {
             var tweet = streams.home[index];
             var $tweet = generateTweet(tweet);
             $tweet.appendTo($feed);
             index--;
+            addedTweets++;
           }
 
         };
+
+        $('#refresh-button').on('click', function(event){
+          event.preventDefault();
+          refreshFeed();
+        });
 
         refreshFeed(); // refresh the feed at the start of the doc ready
 
