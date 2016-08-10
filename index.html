@@ -14,7 +14,6 @@
     </header>
     <div class="width-container body-container">
       <section class="feed">
-        <h1>Feed</h1>
     </div>
     <script>
 
@@ -28,13 +27,22 @@
           return $result;
         };
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = generateTweet(tweet);
-          $tweet.appendTo($('.feed'));
-          index -= 1;
-        }
+        var refreshFeed = function() {
+          var maxTweets = 10; // only show the newest 10 tweets
+          var index = streams.home.length < maxTweets ?
+                          streams.home.length - 1 : maxTweets - 1;
+          var $feed = $('.feed');
+          $feed.empty();
+          while (index >= 0) {
+            var tweet = streams.home[index];
+            var $tweet = generateTweet(tweet);
+            $tweet.appendTo($feed);
+            index--;
+          }
+
+        };
+
+        refreshFeed(); // refresh the feed at the start of the doc ready
 
       });
 
