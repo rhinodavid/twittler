@@ -10,7 +10,8 @@
     <header>
       <div class="width-container">
         <h1>twittler</h1>
-        <a href="#"><span id="refresh-button">Refresh</span></a>
+        <a href="#"><span id="refresh-button" class="nav-button">Refresh</span></a>
+        <a href="#"><span id="home-button" class="nav-button">Back to home</span></a>
       </div>
     </header>
     <div class="width-container body-container">
@@ -22,15 +23,15 @@
 
         var generateTweet = function(tweet) {
           var now = new Date();
-          var $result = $('<div class="tweet"></div>');
-          $result.append($('<span class="user"></span>').text('@' + tweet.user));
+          var $result = $('<div class="tweet" data-user="' + tweet.user + '"></div>');
+          $result.append($('<a href="#" class="user"></a>').text('@' + tweet.user));
           $result.append($('<p></p>').text(tweet.message));
           $result.append($('<span class="time"></span>').text(timeAgo(tweet.created_at, now)));
           return $result;
         };
 
         var refreshFeed = function() {
-          var maxTweets = 25; // only show the newest 10 tweets
+          var maxTweets = 25; // only show the newest 25 tweets
           var addedTweets = 0;
           var index = streams.home.length - 1;
           var $feed = $('.feed');
@@ -44,12 +45,47 @@
             addedTweets++;
           }
 
+          $('.user').on('click', function(event){
+            console.log("user");
+            event.preventDefault();
+            event.stopPropagation();
+            var userName = $(this).closest('.tweet').data('user');
+            console.log("showing user feed for user: " + userName);
+            showUserFeed(userName);
+          });
+
+        };
+
+        var showUserFeed = function (userName) {
+          var maxTweets = 25;
+          var addedTweets = 0;
+          var index = streams.users[userName].length - 1;
+          var $feed = $('.feed');
+          $('#home-button').show();
+          $('#refresh-button').hide();
+          $feed.empty();
+          $('<h1>@' + userName + '\'s Twittlings</h1>').appendTo($feed);
+          while (index >= 0 && addedTweets < maxTweets) {
+            var tweet = streams.users[userName][index];
+            var $tweet = generateTweet(tweet);
+            $tweet.appendTo($feed);
+            index--;
+            addedTweets++;            
+          }
+
         };
 
         $('#refresh-button').on('click', function(event){
           event.preventDefault();
           refreshFeed();
         });
+
+        $('#home-button').on('click', function(event){
+          event.preventDefault();
+          $('#home-button').hide();
+          $('#refresh-button').show();
+          refreshFeed();
+        })
 
         refreshFeed(); // refresh the feed at the start of the doc ready
 
