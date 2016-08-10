@@ -46,11 +46,9 @@
           }
 
           $('.user').on('click', function(event){
-            console.log("user");
             event.preventDefault();
             event.stopPropagation();
             var userName = $(this).closest('.tweet').data('user');
-            console.log("showing user feed for user: " + userName);
             showUserFeed(userName);
           });
 
